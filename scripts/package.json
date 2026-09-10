@@ -1,0 +1,19 @@
+{
+  "name": "reqtk-scripts",
+  "version": "0.1.0",
+  "scripts": {
+    "material_icons": "npx tsx src/material_icons.ts",
+    "vscode_material_icons": "npx tsx src/vscode_material_icons.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "description": "",
+  "devDependencies": {
+    "@material-design-icons/svg": "^0.14.15",
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "vscode-material-icons": "^0.1.1"
+  }
+}

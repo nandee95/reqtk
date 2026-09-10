@@ -1,0 +1,30 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "Req toolkit configuration file",
+    "type": "object",
+    "properties": {
+        "$schema": {
+            "type": "string",
+            "description": "JSON Schema URL used by the configuration file."
+        },
+        "sources": {
+            "type": "array",
+            "description": "List of sources.",
+            "items": {
+                "type": "string",
+                "description": "A glob pattern of source files. e.g. \"src/**/*.rs\""
+            },
+            "default": []
+        },
+        "requirements": {
+            "type": "array",
+            "description": "List of requirement files.",
+            "items": {
+                "description": "A glob pattern of requirement files. e.g. \"**/*.req\"",
+                "type": "string"
+            },
+            "default": []
+        }
+    },
+    "additionalProperties": false
+}

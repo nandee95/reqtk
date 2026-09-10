@@ -1,0 +1,6 @@
+@req(Requirement) {
+	[type=functional]
+	[description]
+	Hello world
+	[/description]
+}

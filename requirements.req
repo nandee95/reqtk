@@ -1,0 +1,301 @@
+[id-count=45]
+[id-prefix=REQTK-]
+[id-type=incremental]
+@REQTK-1(Work in progress) {
+	[type=limitation]
+	[description]
+	This document is a work in progress and may not cover all aspects of the requirements. The identifiers, structure and content is subject to change.
+	[/description]
+}
+@REQTK-2(ReqTk Requirements) {
+	@REQTK-3(Commandline interface) {
+		@REQTK-4(Sub-commands) {
+			@REQTK-5(convert) {
+				@REQTK-6(From) {
+					[type=parameter]
+					[description]
+					Input format (defaults to extension of <input> if auto).
+					
+					**arg:** -f <value>, --from <value> \\
+					**possible values:**
+					- `auto` (default)
+					- `req`
+					- `json`
+					[/description]
+				}
+				@REQTK-7(To) {
+					[type=parameter]
+					[description]
+					Output format (defaults to extension of --output if auto).
+					
+					**arg:** -t <value>, --to <value>\\
+					**possible values:**
+					- `auto` (default)
+					- `req`
+					- `json`
+					- `md`
+					[/description]
+				}
+				@REQTK-8(Span) {
+					[type=parameter]
+					[description]
+					Include spans (for json format only).
+					
+					**arg:** --span
+					[/description]
+				}
+			}
+			@REQTK-9(format) {
+				@REQTK-10(Format) {
+					[type=parameter]
+					[description]
+					Formatting style to apply.
+					
+					**arg:** -f <value>, --format <value>
+					**possible values:**
+					- `reformat` (default)
+					- `minify`
+					- `unchanged`
+					[/description]
+				}
+				@REQTK-11(Diff) {
+					[type=parameter]
+					[description]
+					Show differences instead of writing to the output(s).
+					
+					**arg:** --diff
+					[/description]
+				}
+			}
+			@REQTK-12(transform) {
+				@REQTK-13(Id) {
+					[type=parameter]
+					[description]
+					Re-apply ids for the file.
+					
+					**arg:** --id <value>
+					**possible values:**
+					- `incremental`
+					- `incremental-N` (where N is an unsigned integer)
+					[/description]
+				}
+				@REQTK-14(Id prefix) {
+					[type=parameter]
+					[description]
+					Re-apply ID prefix to the file.
+					
+					**arg:** --id-prefix \\<value>
+					**type:** string
+					[/description]
+				}
+			}
+			@REQTK-15(tokenize) {
+				@REQTK-16(Format) {
+					[type=parameter]
+					[description]
+					Output format.
+					
+					**arg:** -f <value>, --format <value>
+					**possible values:**
+					- `human` (default)
+					- `json`
+					[/description]
+				}
+			}
+			@REQTK-17(find) {
+				@REQTK-18(Id) {
+					[type=parameter]
+					[description]
+					ID of the requirement to find.
+					
+					**arg:** <id>
+					**type:** string
+					[/description]
+				}
+				@REQTK-19(Format) {
+					[type=parameter]
+					[description]
+					Output format.
+					
+					**arg:** -f <value>, --format <value>
+					**possible values:**
+					- `req` (default)
+					- `json`
+					[/description]
+				}
+			}
+			@REQTK-20(trace) {
+				@REQTK-21(No additional parameters) {
+					[type=informative]
+				}
+			}
+			@REQTK-22(check) {
+				@REQTK-23(No additional parameters) {
+					[type=informative]
+				}
+			}
+			@REQTK-24(init) {
+				@REQTK-25(No additional parameters) {
+					[type=informative]
+				}
+			}
+		}
+		@REQTK-26(Input handling) {
+			@REQTK-27(Inputs) {
+				[type=parameter]
+				[description]
+				Input locations. When missing the inputs are taken from nearest 'reqtk.json'.
+				Use a single '-' for stdin.
+				
+				**arg:** <input>
+				**type:** path(s)
+				[/description]
+			}
+			@REQTK-28(Output) {
+				[type=parameter]
+				[description]
+				Output location for single input.
+				Use '-' for stdout.
+				
+				**arg:** -o <value>, --output <value>
+				**type:** path
+				[/description]
+			}
+		}
+		@REQTK-29(Help) {
+			[type=parameter]
+			[description]
+			Print help.
+			
+			**arg:** --help
+			[/description]
+		}
+		@REQTK-30(Version) {
+			[type=parameter]
+			[description]
+			Print version.
+			
+			**arg:** --version
+			[/description]
+		}
+		@REQTK-31(Reporting format) {
+			[type=parameter]
+			[description]
+			Issue reporting format.
+			
+			**arg:** -r, --report
+			**type:** enum
+			**possible values:**
+			- `human` (default)
+			- `json`
+			[/description]
+		}
+		@REQTK-32(Verbose) {
+			[type=parameter]
+			[description]
+			Enable verbose output.
+			
+			**arg:** -v, --verbose
+			[/description]
+		}
+	}
+}
+@REQTK-33(Req file specification) {
+	@REQTK-34(Syntax) {
+		@REQTK-35(Root) {
+			[type=functional]
+			[description]
+			The root of the requirement contains zero or more items of the following list, in any order, duplications allowed:
+			- {@REQTK-40}
+			- {@REQTK-39}
+			- {@REQTK-36}
+			[/description]
+		}
+		@REQTK-36(Attribute syntax) {
+			@REQTK-37(Inline attribute syntax) {
+				[type=functional]
+				[description]
+				Inline attributes have the following syntax:
+				```
+				\[key=value]
+				```
+				Where:
+				`key` - Key of the attribute (`=`, `]` characters shall be escaped, see {@REQTK-41})
+				`value` - Value of the attribute (`]` character shall be escaped, see {@REQTK-41})
+				[/description]
+			}
+			@REQTK-38(Multi-line attribute syntax) {
+				[type=functional]
+				[description]
+				Multi-line attributes have the following syntax:
+				```
+				\[key]value\[/key]
+				```
+				Where:
+				`key` - Key of the attribute (`=`, `]` characters shall be escaped, see {@REQTK-41})
+				`value` - Value of the attribute (`\[` character shall be escaped, see {@REQTK-41})
+				[/description]
+			}
+		}
+		@REQTK-39(Requirement syntax) {
+			[type=functional]
+			[description]
+			Requirement definition has the following syntax:
+			```
+			@id(title) {
+				body
+			}
+			```
+			Where:
+			`id` - Identifier of the requirement
+			`title` - Title of the requirement
+			`body` - Body of the requirement, may contain zero or more items from the following list, in any order, duplications allowed:
+				- {@REQTK-39}
+				- {@REQTK-36}
+			[/description]
+		}
+		@REQTK-40(Requirement type syntax) {
+			[type=functional]
+			[description]
+			Requirement type has the following syntax:
+			```
+			$id(title) {
+				body
+			}
+			```
+			Where:
+			- `id` - Identifier of the requirement type
+			- `title` - Title of the requirement type
+			- `body` - Body of the requirement type, may contain zero or more items from the following list, in any order, duplications allowed:
+				- {@REQTK-36}
+			[/description]
+		}
+	}
+	@REQTK-41(Escaping) {
+		@REQTK-42(Escape syntax) {
+			[type=functional]
+			[description]
+			Any character may be escaped.
+			An escaped character means a literal character that shall not be interpreted as a syntactic token. (`\\`). (e.g. `=` => `\\=`, `]` => `\\]`)
+			[/description]
+		}
+		@REQTK-43(Using the escape character) {
+			[type=functional]
+			[description]
+			To include the escape character itself, it shall be escaped with another backslash (e.g. `\\` => `\\\\`).
+			[/description]
+		}
+	}
+	@REQTK-44(Whitespaces) {
+		[type=functional]
+		[description]
+		Whitespaces are allowed anywhere in the req file.
+		[/description]
+	}
+	@REQTK-45(Character encoding) {
+		[type=functional]
+		[description]
+		The req file shall support UTF-8 character encoding.
+		[/description]
+	}
+}

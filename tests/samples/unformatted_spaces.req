@@ -1,0 +1,16 @@
+[id-prefix=]
+$business(Business) {
+    [icon=business]
+    [color=red]
+}
+@1(Parent) {
+    @2(Child) {
+        [type=functional]
+        [description]
+        Hello world
+        Second line
+            Third line
+        Fourth line
+        [/description]
+    }
+}
