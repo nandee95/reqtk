@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+            width="121.69531"
+            height="17"
+            viewBox="0 0 121.69531 17"
+            role="img"
+            aria-label="REQTK-53 Folder">
+
+            <rect
+                x="0"
+                y="0"
+                width="121.69531"
+                height="17"
+                rx="3"
+                fill="#222"
+            />
+
+            <path
+                d="M11 21h-1l1-7H7.5c-.58 0-.57-.32-.38-.66.19-.34.05-.08.07-.12C8.48 10.94 10.42 7.54 13 3h1l-1 7h3.5c.49 0 .56.33.47.51l-.07.15C12.96 17.55 11 21 11 21z"
+                fill="#3b82f6"
+                transform="translate(3, 0),scale(0.7)"
+            />
+
+            <text
+                x="20"
+                y="12"
+                font-family="Arial"
+                font-size="12"
+                fill="#AAA"
+            >REQTK-53</text>
+
+            <text
+                x="81.68164"
+                y="12"
+                font-family="Arial"
+                font-size="12"
+                fill="white"
+            >Folder</text>
+        </svg>

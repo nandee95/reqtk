@@ -1,0 +1,8 @@
+@first(First) {
+    @second(Second) {
+        [description=Hey]
+    }
+    [description]
+    Hello world!
+    [/description]
+}

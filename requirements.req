@@ -1,0 +1,450 @@
+[id-count=82]
+[id-prefix=REQTK-]
+[id-type=incremental]
+@REQTK-1(ReqTk Requirements) {
+	@REQTK-2(Commandline interface) {
+		@REQTK-3(Sub-commands) {
+			@REQTK-4(convert) {
+				@REQTK-5(From) {
+					[type=parameter]
+					[description]
+					Input format (defaults to extension of <input> if auto).
+					
+					**arg:** -f <value>, --from <value> \\
+					**possible values:**
+					- `auto` (default)
+					- `req`
+					- `json`
+					[/description]
+				}
+				@REQTK-6(To) {
+					[type=parameter]
+					[description]
+					Output format (defaults to extension of --output if auto).
+					
+					**arg:** -t <value>, --to <value>\\
+					**possible values:**
+					- `auto` (default)
+					- `req`
+					- `json`
+					- `md`
+					[/description]
+				}
+				@REQTK-7(Span) {
+					[type=parameter]
+					[description]
+					Include spans (for json format only).
+					
+					**arg:** --span
+					[/description]
+				}
+			}
+			@REQTK-8(format) {
+				@REQTK-9(Format) {
+					[type=parameter]
+					[description]
+					Formatting style to apply.
+					
+					**arg:** -f <value>, --format <value>
+					**possible values:**
+					- `reformat` (default)
+					- `minify`
+					- `unchanged`
+					[/description]
+				}
+			}
+			@REQTK-10(transform) {
+				@REQTK-12(Id) {
+					[type=parameter]
+					[description]
+					Re-apply ids for the file.
+					
+					**arg:** --id <value>
+					**possible values:**
+					- `incremental`
+					- `incremental-N` (where N is an unsigned integer)
+					[/description]
+				}
+				@REQTK-13(Prefix) {
+					[type=parameter]
+					[description]
+					Re-apply a prefix to the file.
+					
+					**arg:** --prefix \\<value>
+					**type:** string
+					[/description]
+				}
+			}
+			@REQTK-14(tokenize) {
+				@REQTK-15(Format) {
+					[type=parameter]
+					[description]
+					Output format.
+					
+					**arg:** -f <value>, --format <value>
+					**possible values:**
+					- `human` (default)
+					- `json`
+					[/description]
+				}
+			}
+			@REQTK-16(find) {
+				@REQTK-17(Id) {
+					[type=parameter]
+					[description]
+					ID of the requirement to find.
+					
+					**arg:** <id>
+					**type:** string
+					[/description]
+				}
+				@REQTK-18(Format) {
+					[type=parameter]
+					[description]
+					Output format.
+					
+					**arg:** -f <value>, --format <value>
+					**possible values:**
+					- `req` (default)
+					- `json`
+					[/description]
+				}
+			}
+			@REQTK-19(trace) {
+				@REQTK-20(No additional parameters) {
+					[type=informative]
+				}
+			}
+			@REQTK-21(check) {
+				@REQTK-22(No additional parameters) {
+					[type=informative]
+				}
+			}
+		}
+		@REQTK-23(Input handling) {
+			@REQTK-24(Inputs) {
+				[type=parameter]
+				[description]
+				Input locations. When missing the inputs are taken from nearest 'reqtk.json'.
+				Use a single '-' for stdin.
+				
+				**arg:** <input>
+				**type:** path(s)
+				[/description]
+			}
+			@REQTK-25(Output) {
+				[type=parameter]
+				[description]
+				Output location for single input.
+				Use '-' for stdout.
+				
+				**arg:** -o <value>, --output <value>
+				**type:** path
+				[/description]
+			}
+		}
+		@REQTK-26(Help) {
+			[type=parameter]
+			[description]
+			Print help.
+			
+			**arg:** --help
+			[/description]
+		}
+		@REQTK-27(Version) {
+			[type=parameter]
+			[description]
+			Print version.
+			
+			**arg:** --version
+			[/description]
+		}
+		@REQTK-28(Reporting format) {
+			[type=parameter]
+			[description]
+			Issue reporting format.
+			
+			**arg:** -r, --report
+			**type:** enum
+			**possible values:**
+			- `human`
+			- `json` (default)
+			[/description]
+		}
+	}
+	@REQTK-29(Req file format specification) {
+		@REQTK-30(Syntax) {
+			@REQTK-82(Root) {
+				[type=functional]
+				[description]
+				The root of the requirement file may contain any of the following:
+				- Requirements {@REQTK-79}
+				- File level attributes {@REQTK-80} or {@REQTK-81}
+				[/description]
+			}
+			@REQTK-80(Inline attribute definition syntax) {
+				[type=functional]
+				[description]
+				Inline attributes have the following syntax:
+				```
+				\[key=value]
+				```
+				Where:
+				`key` - Key of the attribute
+				`value` - Value of the attribute
+				[/description]
+			}
+			@REQTK-81(Multi-line attribute definition syntax) {
+				[type=functional]
+				[description]
+				Multi-line attributes have the following syntax:
+				```
+				\[key]value\[/key]
+				```
+				Where:
+				`key` - Key of the attribute
+				`value` - Value of the attribute
+				[/description]
+			}
+			@REQTK-79(Requirement defintion syntax) {
+				[type=functional]
+				[description]
+				Requirement definition has the following syntax:
+				```
+				@id(title) {
+					body
+				}
+				```
+				Where:
+				`id` - Identifier of the requirement
+				`title` - Title of the requirement
+				`body` - Body of the requirement, may contain any of the following:
+					- Another requirement {@REQTK-79}
+					- An attribute {@REQTK-80} or {@REQTK-81}
+				[/description]
+			}
+			@REQTK-88(Requirement type syntax) {
+				[type=functional]
+				[description]
+				Requirement type has the following syntax:
+				```
+				$id(title) {
+					body
+				}
+				```
+				Where:
+				- `id` - Identifier of the requirement type
+				- `title` - Title of the requirement type
+				- `body` - Body of the requirement type, may contain one of the following:
+					- An attribute {@REQTK-80} or {@REQTK-81}
+				[/description]
+			}
+		}
+		@REQTK-31(Rules) {
+			@REQTK-32(File level rules) {
+				@REQTK-33(F001: Attribute key syntax) {
+					[type=functional]
+					[description]
+					The attribute key must match the following regex: `^\[a-z0-9-]+$`
+					[/description]
+				}
+				@REQTK-34(F002: Duplicate requirement ID) {
+					[type=functional]
+					[description]
+					A file shall not define the same requirement ID twice.
+					[/description]
+				}
+				@REQTK-35(F003: Requirement type ID syntax) {
+					[type=functional]
+					[description]
+					The attribute key must match the following regex: `^\[a-z0-9-]+$`
+					[/description]
+				}
+				@REQTK-36(F004: Duplicate requirement type ID) {
+					[type=functional]
+					[description]
+					The attribute key must match the following regex: `^\[a-z0-9-]+$`
+					[/description]
+				}
+				@REQTK-78(F005: Requirement ID syntax) {
+					[type=functional]
+					[description]
+					Requirement ID must not contain a whitespa
+					ce.
+					[/description]
+				}
+				@REQTK-89(F006: Invalid attribute value) {
+					[type=functional]
+					[description]
+					An attribute value must conform to the expected type and constraints. See {@REQTK-39}
+					[/description]
+				}
+			}
+			@REQTK-37(Workspace level rules) {
+				@REQTK-38(W001: Duplicate requirement id) {
+					[type=functional]
+					[description]
+					A workspace shall not define the same requirement id twice.
+					[/description]
+				}
+			}
+		}
+		@REQTK-39(Built-in attributes) {
+			@REQTK-40(IDE) {
+				@REQTK-41(IDE support) {
+					[type=informative]
+					[description]
+					These attributes are designed for reqtk's own editor. You are allowed to build your own IDE with different attributes.
+					[/description]
+				}
+				@REQTK-42(File level attributes) {
+					@REQTK-43(Id prefix) {
+						[type=parameter]
+						[description]
+						Prefix that is auto applied to each identifier.
+						
+						**key:** id-prefix
+						**type:** string
+						**default:** ""
+						[/description]
+					}
+					@REQTK-44(Id count) {
+						[type=parameter]
+						[description]
+						Counter used to determine the identifier of a newly inserted requirement.
+						
+						**key:** id-count
+						**type:** unsigned integer
+						**default:** 0
+						[/description]
+					}
+					@REQTK-45(id-type) {
+						[type=parameter]
+						[description]
+						Requirement id type. Used to insert new requirements.
+						
+						**key:** `d-type
+						**possible values:**
+						- `incremental` (default)
+						- `incremental-N` (where N is an unsigned integer)
+						[/description]
+					}
+				}
+				@REQTK-46(Requirement attributes) {
+					@REQTK-47(Type) {
+						[type=parameter]
+						[description]
+						Type of the requirement.
+						
+						**key:** type
+						**type:** enum
+						**possible values:**
+						- One of {@REQTK-88}
+						- One of {@REQTK-52}
+						
+						**default:** {@REQTK-53}
+						[/description]
+					}
+					@REQTK-48(Description) {
+						[type=parameter]
+						[description]
+						Description of the requirement. Markdown encoded.
+						
+						**key:** description
+						**type:** string
+						**default:** ""
+						[/description]
+					}
+				}
+				@REQTK-49(Requirement type attributes) {
+					@REQTK-50(Has children) {
+						[type=parameter]
+					}
+					@REQTK-51(Icon) {
+						[type=parameter]
+					}
+				}
+				@REQTK-52(Built-in requirement types) {
+					@REQTK-53(Folder) {
+						[type=functional]
+						[description]
+						**id:** folder
+						**title:** Folder
+						**icon:** F
+						[/description]
+					}
+					@REQTK-54(Functional) {
+						[type=functional]
+					}
+					@REQTK-55(Informative) {
+						[type=functional]
+					}
+					@REQTK-56(Parameter) {
+						[type=functional]
+					}
+					@REQTK-57(Limitation) {
+						[type=functional]
+					}
+				}
+			}
+		}
+		@REQTK-58(Others) {
+			@REQTK-59(Character encoding) {
+				[type=functional]
+				[description]
+				Req files are UTF-8 encoded.
+				[/description]
+			}
+		}
+	}
+	@REQTK-60(Sub-commands) {
+		@REQTK-61(convert) {
+			@REQTK-62(Purpose) {
+				[type=informative]
+				[description]
+				Converts between requirement formats
+				[/description]
+			}
+		}
+		@REQTK-63(format) {
+			@REQTK-64(Purpose) {
+				[type=informative]
+				[description]
+				Formats .req documents
+				[/description]
+			}
+		}
+		@REQTK-65(transform) {
+			@REQTK-66(Purpose) {
+				[type=informative]
+			}
+		}
+		@REQTK-67(tokenize) {
+			@REQTK-68(Purpose) {
+				[type=informative]
+			}
+		}
+		@REQTK-69(get) {
+			@REQTK-70(Purpose) {
+				[type=informative]
+				[description]
+				[/description]
+			}
+		}
+		@REQTK-71(trace) {
+			@REQTK-72(Purpose) {
+				[type=informative]
+			}
+		}
+	}
+	@REQTK-73(File formats) {
+		@REQTK-74(Req) {
+			@REQTK-75(Parsing) {
+			}
+			@REQTK-76(Tokenizing) {
+			}
+		}
+		@REQTK-77(Json) {
+		}
+	}
+}
