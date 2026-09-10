@@ -1,0 +1,9 @@
+{
+  "$schema": "https://raw.githubusercontent.com/nandee95/reqtk/refs/heads/main/reqtk.schema.json",
+  "sources": [
+    "src/**/*.rs"
+  ],
+  "requirements": [
+    "requirements.req"
+  ]
+}

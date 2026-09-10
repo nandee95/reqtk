@@ -1,0 +1,346 @@
+[id-count=73]
+[id-prefix=REQTK-]
+[id-type=incremental]
+@REQTK-1(ReqTk Requirements) {
+	@REQTK-2(Commandline interface) {
+		@REQTK-3(Sub-commands) {
+			@REQTK-4(convert) {
+				@REQTK-43(From) {
+					[type=parameter]
+					[description]
+					Input format (defaults to extension of <input> if auto).
+					
+					**arg:** -f <value>, --from <value>
+					**possible values:**
+					- `auto` (default)
+					- `req`
+					- `json`
+					[/description]
+				}
+				@REQTK-42(To) {
+					[type=parameter]
+					[description]
+					Output format (defaults to extension of --output if auto).
+					
+					**arg:** -t <value>, --to <value>
+					**possible values:**
+					- `auto` (default)
+					- `req`
+					- `json`
+					- `md`
+					[/description]
+				}
+				@REQTK-70(Span) {
+					[type=parameter]
+					[description]
+					Include spans (for json format only).
+					
+					**arg:** --span
+					[/description]
+				}
+			}
+			@REQTK-5(fmt) {
+				@REQTK-69(Format) {
+					[type=parameter]
+					[description]
+					Formatting style to apply.
+					
+					**arg:** -f <value>, --format <value>
+					**possible values:**
+					- `reformat` (default)
+					- `minify`
+					- `unchanged`
+					[/description]
+				}
+			}
+			@REQTK-6(transform) {
+				@REQTK-41(Format) {
+					[type=parameter]
+					[description]
+					Formatting of the output.
+					
+					**arg:** -f <value>, --format <value>
+					**possible values:**
+					- `format`
+					- `minify`
+					[/description]
+				}
+				@REQTK-39(Re-id) {
+					[type=parameter]
+					[description]
+					Re-apply ids for the file.
+					
+					**arg:** --re-id <value>
+					**possible values:**
+					- `incremental`
+					- `incremental(X)` (where X is an integer)
+					- `random`
+					- `random(X)` (where X is an integer)
+					[/description]
+				}
+				@REQTK-68(Re-prefix) {
+					[type=parameter]
+					[description]
+					Re-apply a prefix to the file.
+					
+					**arg:** --re-prefix<value>
+					**type:** string
+					[/description]
+				}
+			}
+			@REQTK-7(tokenize) {
+				@REQTK-71(Format) {
+					[type=parameter]
+					[description]
+					Output format.
+					
+					**arg:** -f <value>, --format <value>
+					**possible values:**
+					- `human` (default)
+					- `json`
+					[/description]
+				}
+			}
+			@REQTK-8(get) {
+				@REQTK-72(Id) {
+					[type=parameter]
+					[description]
+					ID of the requirement to find.
+					
+					**arg:** <id>
+					**type:** string
+					[/description]
+				}
+				@REQTK-73(Format) {
+					[type=parameter]
+					[description]
+					Output format.
+					
+					**arg:** -f <value>, --format <value>
+					**possible values:**
+					- `req` (default)
+					- `json`
+					[/description]
+				}
+			}
+			@REQTK-9(trace) {
+			}
+		}
+		@REQTK-10(Input handling) {
+			@REQTK-66(Input) {
+				[type=parameter]
+				[description]
+				Input locations. When missing the inputs are taken from nearest 'reqtk.json'.
+				Use a single '-' for stdin.
+				
+				**arg:** <input>
+				**type:** path(s)
+				[/description]
+			}
+			@REQTK-67(Output) {
+				[type=parameter]
+				[description]
+				Output file for single input.
+				Use '-' for stdout.
+				
+				**arg:** -o <value>, --output <value>
+				**type:** path
+				[/description]
+			}
+		}
+		@REQTK-14(Help) {
+			[type=parameter]
+			[description]
+			Print help.
+			
+			**arg:** --help
+			[/description]
+		}
+		@REQTK-15(Version) {
+			[type=parameter]
+			[description]
+			Print version.
+			
+			**arg:** --version
+			[/description]
+		}
+		@REQTK-58(Reporting format) {
+			[type=parameter]
+			[description]
+			Issue reporting format.
+			
+			**arg:** -r, --report
+			**type:** enum
+			**possible values:**
+			- `human`
+			- `json` (default)
+			[/description]
+		}
+	}
+	@REQTK-16(Req file format specification) {
+		@REQTK-17(Syntax) {
+		}
+		@REQTK-18(Rules) {
+			@REQTK-19(R001: XX) {
+				[type=functional]
+			}
+		}
+		@REQTK-44(Built-in attributes) {
+			@REQTK-45(IDE) {
+				@REQTK-65(IDE support) {
+					[type=informative]
+					[description]
+					These attributes are designed for reqtk's own editor. You are allowed to build your own IDE with different attributes.
+					[/description]
+				}
+				@REQTK-50(File level attributes) {
+					@REQTK-47(Id prefix) {
+						[type=parameter]
+						[description]
+						Prefix that is auto applied to each identifier.
+						
+						**key:** id-prefix
+						**type:** string
+						**default:** ""
+						[/description]
+					}
+					@REQTK-48(Id count) {
+						[type=parameter]
+						[description]
+						Counter used to determine the identifier of a newly inserted requirement.
+						
+						**key:** id-count
+						**type:** unsigned integer
+						**default:** 0
+						[/description]
+					}
+					@REQTK-49(id-type) {
+						[type=parameter]
+						[description]
+						Requirement id type. Used to insert new requirements.
+						
+						**key:** `d-type
+						**possible values:**
+						- `incremental` (default)
+						- `incremental(X)` (where X is an integer)
+						- `random`
+						- `random(X)` (where X is an integer)
+						[/description]
+					}
+				}
+				@REQTK-51(Requirement attributes) {
+					@REQTK-52(Type) {
+						[type=parameter]
+						[description]
+						Type of the requirement.
+						
+						**key:** type
+						**type:** enum
+						**possible values:**
+						- 
+						**default:** 0
+						[/description]
+					}
+					@REQTK-53(Description) {
+						[type=parameter]
+						[description]
+						Description of the requirement. Markdown encoded.
+						
+						**key:** description
+						**type:** string
+						**default:** ""
+						[/description]
+					}
+				}
+				@REQTK-54(Requirement type attributes) {
+					@REQTK-55(Has children) {
+						[type=parameter]
+					}
+					@REQTK-56(Icon) {
+						[type=parameter]
+					}
+				}
+				@REQTK-59(Built-in requirement types) {
+					@REQTK-62(Folder) {
+						[type=functional]
+						[description]
+						**id:** folder
+						**title:** Folder
+						**icon:** F
+						[/description]
+					}
+					@REQTK-60(Functional) {
+						[type=functional]
+					}
+					@REQTK-61(Informative) {
+						[type=functional]
+					}
+					@REQTK-63(Parameter) {
+						[type=functional]
+					}
+					@REQTK-64(Limitation) {
+						[type=functional]
+					}
+				}
+			}
+		}
+		@REQTK-57(Others) {
+			@REQTK-20(Character encoding) {
+				[type=functional]
+				[description]
+				Req files are UTF-8 encoded.
+				[/description]
+			}
+		}
+	}
+	@REQTK-21(Sub-commands) {
+		@REQTK-22(convert) {
+			@REQTK-33(Purpose) {
+				[type=informative]
+				[description]
+				Converts between requirement formats
+				[/description]
+			}
+		}
+		@REQTK-23(fmt) {
+			@REQTK-34(Purpose) {
+				[type=informative]
+				[description]
+				Formats .req documents
+				[/description]
+			}
+		}
+		@REQTK-24(transform) {
+			@REQTK-35(Purpose) {
+				[type=informative]
+			}
+		}
+		@REQTK-25(tokenize) {
+			@REQTK-36(Purpose) {
+				[type=informative]
+			}
+		}
+		@REQTK-26(get) {
+			@REQTK-37(Purpose) {
+				[type=informative]
+				[description]
+				[/description]
+			}
+		}
+		@REQTK-27(trace) {
+			@REQTK-38(Purpose) {
+				[type=informative]
+			}
+		}
+	}
+	@REQTK-28(File formats) {
+		@REQTK-29(Req) {
+			@REQTK-30(Parsing) {
+			}
+			@REQTK-31(Tokenizing) {
+			}
+		}
+		@REQTK-32(Json) {
+		}
+	}
+}

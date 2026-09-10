@@ -1,0 +1,13 @@
+[id-type=incremental]
+$business(Business) {
+	[icon=business]
+	[color=red]
+}
+@1(Parent) {
+	@2(Child) {
+		[type=functional]
+		[description]
+		Hello world
+		[/description]
+	}
+}

@@ -1,0 +1,33 @@
+[tasks.pre-build-wasm]
+command = "cargo"
+args = ["build", "--release", "--target", "wasm32-unknown-unknown"]
+
+[tasks.opt-wasm]
+dependencies = ["pre-build-wasm"]
+command = "wasm-opt"
+cwd = "target/wasm32-unknown-unknown/release"
+args = ["-O3", "-all", "-o", "reqtk_opt.wasm", "reqtk.wasm"]
+
+[tasks.bindgen-wasm]
+dependencies = ["opt-wasm"]
+cwd = "target/wasm32-unknown-unknown/release"
+command = "wasm-bindgen"
+args = ["--out-dir", ".", "--target", "web", "reqtk_opt.wasm"]
+
+[tasks.build-wasm]
+dependencies = ["bindgen-wasm"]
+cwd = "target/wasm32-unknown-unknown/release"
+command = "ls"
+args = ["-lh", "./reqtk.wasm", "./reqtk_opt.wasm", "./reqtk_opt_bg.wasm"]
+
+[tasks.requirements]
+command = "cargo"
+args = [
+    "run",
+    "--release",
+    "--",
+    "convert",
+    "requirements.req",
+    "-o",
+    "REQUIREMENTS.md",
+]
