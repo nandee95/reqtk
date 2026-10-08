@@ -321,7 +321,7 @@ Enable verbose output.
 The root of the requirement contains zero or more items of the following list, in any order, duplications allowed:
 - [![REQTK-40](REQUIREMENTS/badge_REQTK-40.svg)](#REQTK-40)
 - [![REQTK-39](REQUIREMENTS/badge_REQTK-39.svg)](#REQTK-39)
-- {@REQTK-36}
+- [![REQTK-36](REQUIREMENTS/badge_REQTK-36.svg)](#REQTK-36)
 
 </blockquote>
 </ul>
@@ -339,8 +339,8 @@ Inline attributes have the following syntax:
 [key=value]
 ```
 Where:
-`key` - Key of the attribute (`=`, `]` characters shall be escaped, see {@REQTK-41})
-`value` - Value of the attribute (`]` character shall be escaped, see {@REQTK-41})
+`key` - Key of the attribute (`=`, `]` characters shall be escaped, see [![REQTK-41](REQUIREMENTS/badge_REQTK-41.svg)](#REQTK-41))
+`value` - Value of the attribute (`]` character shall be escaped, see [![REQTK-41](REQUIREMENTS/badge_REQTK-41.svg)](#REQTK-41))
 
 </blockquote>
 </ul>
@@ -355,8 +355,8 @@ Multi-line attributes have the following syntax:
 [key]value[/key]
 ```
 Where:
-`key` - Key of the attribute (`=`, `]` characters shall be escaped, see {@REQTK-41})
-`value` - Value of the attribute (`[` character shall be escaped, see {@REQTK-41})
+`key` - Key of the attribute (`=`, `]` characters shall be escaped, see [![REQTK-41](REQUIREMENTS/badge_REQTK-41.svg)](#REQTK-41))
+`value` - Value of the attribute (`[` character shall be escaped, see [![REQTK-41](REQUIREMENTS/badge_REQTK-41.svg)](#REQTK-41))
 
 </blockquote>
 </ul>
@@ -379,7 +379,7 @@ Where:
 `title` - Title of the requirement
 `body` - Body of the requirement, may contain zero or more items from the following list, in any order, duplications allowed:
 	- [![REQTK-39](REQUIREMENTS/badge_REQTK-39.svg)](#REQTK-39)
-	- {@REQTK-36}
+	- [![REQTK-36](REQUIREMENTS/badge_REQTK-36.svg)](#REQTK-36)
 
 </blockquote>
 </ul>
@@ -399,7 +399,7 @@ Where:
 - `id` - Identifier of the requirement type
 - `title` - Title of the requirement type
 - `body` - Body of the requirement type, may contain zero or more items from the following list, in any order, duplications allowed:
-	- {@REQTK-36}
+	- [![REQTK-36](REQUIREMENTS/badge_REQTK-36.svg)](#REQTK-36)
 
 </blockquote>
 </ul>

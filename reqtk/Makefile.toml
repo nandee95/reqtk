@@ -1,0 +1,7 @@
+# Generated content
+[tasks.generate-icons]
+cwd = "scripts"
+script = """
+npm run --silent vscode_material_icons > "../src/generated/vscode_material_icons.rs"
+npm run --silent material_icons > "../src/generated/material_icons.rs"
+"""

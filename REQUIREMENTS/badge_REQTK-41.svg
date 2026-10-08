@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+            width="137.04688"
+            height="17"
+            viewBox="0 0 137.04688 17"
+            role="img"
+            aria-label="REQTK-41 Escaping">
+
+            <rect
+                x="0"
+                y="0"
+                width="137.04688"
+                height="17"
+                rx="3"
+                fill="#222"
+            />
+
+            <path
+                d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"
+                fill="#facc15"
+                transform="translate(3, 0),scale(0.7)"
+            />
+
+            <text
+                x="20"
+                y="12"
+                font-family="Arial"
+                font-size="12"
+                fill="#AAA"
+            >REQTK-41</text>
+
+            <text
+                x="81.68164"
+                y="12"
+                font-family="Arial"
+                font-size="12"
+                fill="white"
+            >Escaping</text>
+        </svg>
