@@ -2,79 +2,6 @@ use crate::prelude::*;
 use regex::Regex;
 use std::{str::FromStr, sync::OnceLock};
 
-#[derive(Debug)]
-pub enum VerifyError {
-    InvalidIdentifier {
-        id: String,
-        kind: IdentifierKind,
-        message: String,
-    },
-    DuplicateIndentifier {
-        id: String,
-        kind: IdentifierKind,
-    },
-    RequirementIdMissingPrefix {
-        id: String,
-        prefix: String,
-    },
-    InvalidRequirementType {
-        id: String,
-        possible_types: Vec<String>,
-    },
-    InvalidAttributeValue {
-        key: String,
-        value: String,
-        error: String,
-    },
-}
-
-impl std::fmt::Display for VerifyError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            VerifyError::InvalidIdentifier {
-                id,
-                kind,
-                message: regex,
-            } => {
-                write!(
-                    f,
-                    "{:?} identifier of {:?} does not match regex {:?}",
-                    id, kind, regex
-                )
-            }
-            VerifyError::DuplicateIndentifier { id, kind } => {
-                write!(f, "Duplicate {:?} identifier: {:?}", kind, id)
-            }
-            VerifyError::RequirementIdMissingPrefix { id, prefix } => {
-                write!(
-                    f,
-                    "Requirement ID {:?} does not start with prefix {:?}",
-                    id, prefix
-                )
-            }
-            VerifyError::InvalidRequirementType { id, possible_types } => {
-                write!(
-                    f,
-                    "Invalid requirement type: {:?}. Possible types: \"{}\"",
-                    id,
-                    possible_types.join("\", \"")
-                )
-            }
-            VerifyError::InvalidAttributeValue {
-                key,
-                value,
-                error: expected,
-            } => {
-                write!(
-                    f,
-                    "Invalid value for attribute {:?}={:?}. Error: {}",
-                    key, value, expected
-                )
-            }
-        }
-    }
-}
-
 pub struct Verifier {
     errors: Vec<Spanned<VerifyError>>,
     id_prefix: Option<String>,
@@ -209,8 +136,8 @@ impl Verifier {
 
     fn verify_identifier(&mut self, id: &Spanned<String>, kind: IdentifierKind) {
         static REGEX_LOCK: OnceLock<Regex> = OnceLock::new();
-        let regex =
-            REGEX_LOCK.get_or_init(|| Regex::new("^[a-z0-9-]+$").expect(PANIC_INVALID_REGEX));
+        let regex = REGEX_LOCK
+            .get_or_init(|| Regex::new("^[a-z0-9][a-z0-9-]*$").expect(PANIC_INVALID_REGEX));
 
         if !regex.is_match(&id.value) {
             self.errors.push(Spanned::new(
@@ -218,7 +145,7 @@ impl Verifier {
                     kind,
                     id: id.value.clone(),
                     message:
-                        "Identifier must consist of lowercase letters, numbers, and hyphens only"
+                        "identifier must consist of lowercase letters, numbers and dashes, and cannot start with a dash"
                             .to_string(),
                 },
                 id.span,
@@ -253,24 +180,24 @@ impl Verifier {
     ) {
         match key.value.as_str() {
             Attribute::FILE_ID_TYPE => {
-                if let Err(err) = IdType::from_str(&value.value) {
+                if let Err(error) = IdType::from_str(&value.value) {
                     self.errors.push(Spanned::new(
                         VerifyError::InvalidAttributeValue {
                             key: key.value.clone(),
                             value: value.value.clone(),
-                            error: err,
+                            message: error,
                         },
                         value.span,
                     ));
                 }
             }
             Attribute::FILE_ID_COUNT => {
-                if let Err(err) = u32::from_str(&value.value) {
+                if let Err(error) = u32::from_str(&value.value) {
                     self.errors.push(Spanned::new(
                         VerifyError::InvalidAttributeValue {
                             key: key.value.clone(),
                             value: value.value.clone(),
-                            error: err.to_string(),
+                            message: error.to_string(),
                         },
                         value.span,
                     ));

@@ -47,7 +47,7 @@ fn test_check_file_level_attribute_key() {
             Spanned::new(
                 Issue::new(
                     IssueSeverity::Error,
-                    "\"\" identifier of attribute does not match regex \"Identifier must consist of lowercase letters, numbers, and hyphens only\""
+                    "invalid \"\" identifier of attribute: identifier must consist of lowercase letters, numbers and dashes, and cannot start with a dash"
                 ),
                 Some(Span::new(Cursor::end("["), Cursor::end("["))),
             ),
@@ -60,7 +60,7 @@ fn test_check_file_level_attribute_key() {
             Spanned::new(
                 Issue::new(
                     IssueSeverity::Error,
-                    "\"_\" identifier of attribute does not match regex \"Identifier must consist of lowercase letters, numbers, and hyphens only\""
+                    "invalid \"_\" identifier of attribute: identifier must consist of lowercase letters, numbers and dashes, and cannot start with a dash"
                 ),
                 Some(Span::new(Cursor::end("["), Cursor::end("[_"))),
             ),
@@ -78,7 +78,7 @@ fn test_check_requirement_attribute_key() {
             Spanned::new(
                 Issue::new(
                     IssueSeverity::Error,
-                    "\"\" identifier of attribute does not match regex \"Identifier must consist of lowercase letters, numbers, and hyphens only\""
+                    "invalid \"\" identifier of attribute: identifier must consist of lowercase letters, numbers and dashes, and cannot start with a dash"
                 ),
                 Some(Span::new(
                     Cursor::end("@id(Title){["),
@@ -94,7 +94,7 @@ fn test_check_requirement_attribute_key() {
             Spanned::new(
                 Issue::new(
                     IssueSeverity::Error,
-                    "\"_\" identifier of attribute does not match regex \"Identifier must consist of lowercase letters, numbers, and hyphens only\""
+                    "invalid \"_\" identifier of attribute: identifier must consist of lowercase letters, numbers and dashes, and cannot start with a dash"
                 ),
                 Some(Span::new(
                     Cursor::end("@id(Title){["),
