@@ -77,6 +77,19 @@ Options:
   -v, --verbose          Enable verbose output
   -h, --help             Print help
   -V, --version          Print version
+
+Input location ([INPUTS]):
+MISSING    → inputs from nearest 'reqtk.json' workspace file
+PATH       → use the given files
+reqtk.json → load files from the provided workspace file
+-          → stdin
+
+Output location (-o, --output):
+MISSING    → output to default location
+             (same as input, extension is changed to match the output format)
+             e.g. file.req → file.tokens.json, stdin → stdout
+PATH       → output location (only when one input is provided)
+-          → stdout
 ```
 
 
