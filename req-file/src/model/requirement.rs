@@ -1,18 +1,18 @@
 use crate::prelude::*;
-use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
 pub type Requirements = Vec<Requirement>;
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
+#[derive(Debug, Default, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct Requirement {
     pub id: Spanned<String>,
     pub title: Spanned<String>,
-    #[serde(skip_serializing_if = "Vec::is_empty")]
+    #[cfg_attr(feature = "serde", serde(skip_serializing_if = "Vec::is_empty"))]
     pub attributes: Attributes,
-    #[serde(skip_serializing_if = "Vec::is_empty")]
+    #[cfg_attr(feature = "serde", serde(skip_serializing_if = "Vec::is_empty"))]
     pub children: Requirements,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "serde", serde(skip_serializing_if = "Option::is_none"))]
     pub span: Option<Span>,
 }
 

@@ -1,5 +1,4 @@
 use crate::prelude::*;
-use serde::{Deserialize, Serialize, ser::SerializeStruct};
 
 #[derive(Debug, Clone, Eq, PartialEq, Hash, Default)]
 pub struct Spanned<T> {
@@ -7,11 +6,14 @@ pub struct Spanned<T> {
     pub span: Option<Span>,
 }
 
-impl<T: Serialize> Serialize for Spanned<T> {
+#[cfg(feature = "serde")]
+impl<T: serde::Serialize> serde::Serialize for Spanned<T> {
     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
     where
         S: serde::Serializer,
     {
+        use serde::ser::SerializeStruct;
+
         if let Some(span) = self.span {
             let mut state = serializer.serialize_struct("Spanned", 2)?;
             state.serialize_field("value", &self.value)?;
@@ -23,12 +25,13 @@ impl<T: Serialize> Serialize for Spanned<T> {
     }
 }
 
-impl<'de, T: Deserialize<'de>> Deserialize<'de> for Spanned<T> {
+#[cfg(feature = "serde")]
+impl<'de, T: serde::Deserialize<'de>> serde::Deserialize<'de> for Spanned<T> {
     fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: serde::Deserializer<'de>,
     {
-        #[derive(Deserialize)]
+        #[derive(serde::Deserialize)]
         struct SpannedHelper<T> {
             value: T,
             span: Option<Span>,

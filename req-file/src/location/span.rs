@@ -1,5 +1,4 @@
 use crate::prelude::*;
-use serde::{Deserialize, Deserializer, Serialize, ser::SerializeTuple};
 
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Hash)]
 pub struct Span {
@@ -31,23 +30,28 @@ impl Span {
     }
 }
 
-impl Serialize for Span {
+#[cfg(feature = "serde")]
+impl serde::Serialize for Span {
     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
     where
         S: serde::Serializer,
     {
+        use serde::ser::SerializeTuple;
+
         let mut state = serializer.serialize_tuple(2)?;
         state.serialize_element(&self.start)?;
         state.serialize_element(&self.end)?;
         state.end()
     }
 }
-impl<'de> Deserialize<'de> for Span {
+
+#[cfg(feature = "serde")]
+impl<'de> serde::Deserialize<'de> for Span {
     fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
-        D: Deserializer<'de>,
+        D: serde::Deserializer<'de>,
     {
-        let (start, end): (Cursor, Cursor) = Deserialize::deserialize(deserializer)?;
+        let (start, end): (Cursor, Cursor) = serde::Deserialize::deserialize(deserializer)?;
         Ok(Span { start, end })
     }
 }

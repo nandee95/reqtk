@@ -1,4 +1,3 @@
-use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
 
 #[derive(Debug, Clone, Eq, PartialEq, Hash)]
@@ -7,7 +6,8 @@ pub enum Location {
     StdIo,
 }
 
-impl Serialize for Location {
+#[cfg(feature = "serde")]
+impl serde::Serialize for Location {
     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
     where
         S: serde::Serializer,
@@ -16,7 +16,8 @@ impl Serialize for Location {
     }
 }
 
-impl<'de> Deserialize<'de> for Location {
+#[cfg(feature = "serde")]
+impl<'de> serde::Deserialize<'de> for Location {
     fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: serde::Deserializer<'de>,

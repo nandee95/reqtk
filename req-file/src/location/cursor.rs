@@ -1,5 +1,4 @@
 use crate::prelude::*;
-use serde::{Deserialize, Deserializer, Serialize, Serializer, ser::SerializeTuple};
 
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Hash)]
 pub struct Cursor {
@@ -75,11 +74,14 @@ impl Cursor {
     }
 }
 
-impl Serialize for Cursor {
+#[cfg(feature = "serde")]
+impl serde::Serialize for Cursor {
     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
     where
-        S: Serializer,
+        S: serde::Serializer,
     {
+        use serde::ser::SerializeTuple;
+
         let mut state = serializer.serialize_tuple(2)?;
         state.serialize_element(&self.line)?;
         state.serialize_element(&self.column)?;
@@ -88,12 +90,14 @@ impl Serialize for Cursor {
     }
 }
 
-impl<'de> Deserialize<'de> for Cursor {
+#[cfg(feature = "serde")]
+impl<'de> serde::Deserialize<'de> for Cursor {
     fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
-        D: Deserializer<'de>,
+        D: serde::Deserializer<'de>,
     {
-        let (line, column, offset): (usize, usize, usize) = Deserialize::deserialize(deserializer)?;
+        let (line, column, offset): (usize, usize, usize) =
+            serde::Deserialize::deserialize(deserializer)?;
         Ok(Cursor {
             line,
             column,

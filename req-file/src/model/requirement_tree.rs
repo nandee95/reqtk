@@ -1,14 +1,14 @@
 use crate::prelude::*;
-use serde::{Deserialize, Serialize};
 use std::{collections::HashMap, str::FromStr};
 
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Debug, Default)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct RequirementTree {
-    #[serde(skip_serializing_if = "Vec::is_empty")]
+    #[cfg_attr(feature = "serde", serde(skip_serializing_if = "Vec::is_empty"))]
     pub attributes: Attributes,
-    #[serde(skip_serializing_if = "Vec::is_empty")]
+    #[cfg_attr(feature = "serde", serde(skip_serializing_if = "Vec::is_empty"))]
     pub types: RequirementTypes,
-    #[serde(skip_serializing_if = "Vec::is_empty")]
+    #[cfg_attr(feature = "serde", serde(skip_serializing_if = "Vec::is_empty"))]
     pub requirements: Requirements,
 }
 

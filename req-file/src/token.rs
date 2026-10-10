@@ -1,7 +1,6 @@
 use crate::prelude::*;
 use adar::prelude::*;
 use regex::Regex;
-use serde::Serialize;
 use std::cell::LazyCell;
 
 pub(crate) struct Symbol {
@@ -76,7 +75,8 @@ pub enum TokenKind {
     AttributeValue(String),
 }
 
-impl Serialize for TokenKind {
+#[cfg(feature = "serde")]
+impl serde::Serialize for TokenKind {
     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
     where
         S: serde::Serializer,
@@ -313,10 +313,11 @@ impl std::fmt::Display for TokenKind {
     }
 }
 
-#[derive(Clone, Eq, PartialEq, Debug, Serialize)]
+#[derive(Clone, Eq, PartialEq, Debug)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize))]
 pub struct Token {
     pub token: TokenKind,
-    #[serde(flatten)]
+    #[cfg_attr(feature = "serde", serde(flatten))]
     pub source: Spanned<String>,
 }
 

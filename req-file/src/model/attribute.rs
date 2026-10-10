@@ -1,13 +1,13 @@
 use crate::prelude::*;
-use serde::{Deserialize, Serialize};
 
 pub type Attributes = Vec<Attribute>;
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
+#[derive(Debug, Default, Clone)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct Attribute {
     pub key: Spanned<String>,
     pub value: Spanned<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "serde", serde(skip_serializing_if = "Option::is_none"))]
     pub span: Option<Span>,
 }
 
