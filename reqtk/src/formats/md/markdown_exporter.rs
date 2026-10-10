@@ -2,7 +2,7 @@ use crate::*;
 use fontdue::Font;
 use html_escape::encode_safe;
 use req_file::prelude::*;
-use std::{fs::create_dir_all, io::Write};
+use std::{fs::create_dir_all, io::Write, path::Path};
 
 pub struct MarkdownExporter<'a> {
     location: Location,
@@ -130,24 +130,27 @@ impl<'a> MarkdownExporter<'a> {
                 let ref_type = self.tree.resolve_requirement_type(
                     ref_requirement.attributes.get("type").map(String::as_str),
                 );
+                let filename = format!("{}/badge_{}.svg", self.folder, reference.value);
 
-                std::fs::write(
-                    format!("{}/badge_{}.svg", self.folder, reference.value),
-                    Self::badge(
-                        ref_type
-                            .attributes
-                            .get("icon")
-                            .map(String::as_str)
-                            .unwrap_or_else(|| "folder"),
-                        ref_type
-                            .attributes
-                            .get("color")
-                            .map(String::as_str)
-                            .unwrap_or_else(|| "red"),
-                        &ref_requirement.id.value,
-                        &ref_requirement.title.value,
-                    ),
-                )?;
+                if !Path::new(&filename).exists() {
+                    std::fs::write(
+                        filename,
+                        Self::generate_badge_svg(
+                            ref_type
+                                .attributes
+                                .get("icon")
+                                .map(String::as_str)
+                                .unwrap_or_else(|| "folder"),
+                            ref_type
+                                .attributes
+                                .get("color")
+                                .map(String::as_str)
+                                .unwrap_or_else(|| "red"),
+                            &ref_requirement.id.value,
+                            &ref_requirement.title.value,
+                        ),
+                    )?;
+                }
 
                 if let Some(span) = reference.span {
                     let range = span.to_range();
@@ -182,7 +185,7 @@ impl<'a> MarkdownExporter<'a> {
             .map(|c| font.metrics(c, font_size).advance_width)
             .sum()
     }
-    pub fn badge(icon: &str, icon_color: &str, id: &str, title: &str) -> String {
+    pub fn generate_badge_svg(icon: &str, icon_color: &str, id: &str, title: &str) -> String {
         let path = MATERIAL_ICONS.get(icon).copied().unwrap_or("");
 
         let escaped_id = html_escape::encode_text(id);
